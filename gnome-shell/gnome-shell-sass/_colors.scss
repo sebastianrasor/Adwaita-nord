@@ -1,0 +1,61 @@
+// When color definition differs for dark and light variant,
+// it gets @if ed depending on $variant
+
+$nord0:  #2e3440;
+$nord1:  #3b4252;
+$nord2:  #434c5e;
+$nord3:  #4c566a;
+$nord4:  #d8dee9;
+$nord5:  #e5e9f0;
+$nord6:  #eceff4;
+$nord7:  #8fbcbb;
+$nord8:  #88c0d0;
+$nord9:  #81a1c1;
+$nord10: #5e81ac;
+$nord11: #bf616a;
+$nord12: #d08770;
+$nord13: #ebcb8b;
+$nord14: #a3be8c;
+$nord15: #b48ead;
+
+$base_color: if($variant == 'light', #fff, $nord0); // lighten(desaturate(#241f31, 20%), 2%)
+$bg_color: if($variant == 'light', #f6f5f4, $nord1); // darken(desaturate(#3d3846, 100%), 4%)
+$fg_color: if($variant == 'light', #2e3436, $nord5); // #eeeeec
+
+$selected_fg_color: $nord0; // #fff
+$selected_bg_color: if($variant == 'light', #3584e4, $nord8); // darken(#3584e4, 10%)
+$selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
+$borders_color: if($variant == 'light', darken($bg_color, 18%), darken($bg_color, 8%));
+$borders_edge: if($variant == 'light', rgba(255,255,255,0.8), transparentize($fg_color, 0.93));
+$link_color: if($variant == 'light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
+$link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
+$top_hilight: $borders_edge;
+
+$warning_color: $nord13; // #f57900
+$error_color: $nord12; // #ff8080
+$success_color: if($variant == 'light', #33d17a, $nord14); // darken(#33d17a, 10%)
+$destructive_color: if($variant == 'light', #e01b24, $nord11); // darken(#e01b24, 10%)
+
+$osd_fg_color: $nord5; // #eeeeec
+$osd_text_color: $nord4; // white
+$osd_bg_color: transparentize($nord1, 0.04); // transparentize(darken(desaturate(#3d3846, 100%), 12%),0.04);
+$osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_color, 1), 10%), 0.5);
+$osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
+$osd_borders_color: transparentize(black, 0.3);
+$osd_outer_borders_color: transparentize(white, 0.84);
+
+$shadow_color: if($variant == 'light', rgba(0,0,0,0.1), rgba(0,0,0,0.2));
+$system_bg_color: $nord0; // desaturate(#241f31,100%)
+
+//insensitive state derived colors
+$insensitive_fg_color: mix($fg_color, $bg_color, 50%);
+$insensitive_bg_color: mix($bg_color, $base_color, 60%);
+$insensitive_borders_color: mix($borders_color, $base_color, 60%);
+
+//colors for the backdrop state, derived from the main colors.
+$backdrop_base_color: if($variant =='light', darken($base_color,1%), lighten($base_color,1%));
+$backdrop_bg_color: $bg_color;
+$backdrop_fg_color: mix($fg_color, $backdrop_bg_color, 80%);
+$backdrop_insensitive_color: if($variant =='light', darken($backdrop_bg_color,15%), lighten($backdrop_bg_color,15%));
+$backdrop_borders_color: mix($borders_color, $bg_color, 90%);
+$backdrop_dark_fill: mix($backdrop_borders_color,$backdrop_bg_color, 35%);
